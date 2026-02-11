@@ -1,5 +1,4 @@
 const assert = require('node:assert/strict')
-const path = require('node:path')
 const { beforeEach, describe, it } = require('node:test')
 
 // npm modules
