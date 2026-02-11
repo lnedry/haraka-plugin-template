@@ -7,6 +7,9 @@
     "CHANGELOG.md",
     "config"
   ],
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "format": "npm run prettier:fix && npm run lint:fix",
     "lint": "npx eslint *.js test",
@@ -14,8 +17,25 @@
     "prettier": "npx prettier . --check",
     "prettier:fix": "npx prettier . --write --log-level=warn",
     "test": "node --test",
+    "test:coverage": "nyc npm test",
     "versions": "npx dependency-version-checker check",
     "versions:fix": "npx dependency-version-checker update"
+  },
+  "nyc": {
+    "all": true,
+    "include": [
+      "index.js"
+    ],
+    "exclude": [
+      "test/**",
+      "node_modules/**"
+    ],
+    "reporter": [
+      "text",
+      "text-summary",
+      "html",
+      "lcov"
+    ]
   },
   "repository": {
     "type": "git",
@@ -33,7 +53,8 @@
   "homepage": "https://github.com/haraka/haraka-plugin-template#readme",
   "devDependencies": {
     "@haraka/eslint-config": "^2.0.2",
-    "haraka-test-fixtures": "^1.3.8"
+    "haraka-test-fixtures": "^1.3.8",
+    "nyc": "^17.1.0"
   },
   "prettier": {
     "singleQuote": true,
