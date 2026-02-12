@@ -21,7 +21,7 @@
     "versions": "npx dependency-version-checker check",
     "versions:fix": "npx dependency-version-checker update"
   },
-  "nyc": {
+  "c8": {
     "all": true,
     "include": [
       "index.js"
