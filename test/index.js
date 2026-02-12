@@ -8,18 +8,15 @@ const plugin_module = require('../index.js')
 // start of tests
 //    assert: https://nodejs.org/api/assert.html
 
-let plugin
-let connection
-
 beforeEach(() => {
-  plugin = new fixtures.plugin('template')
+  this.plugin = new fixtures.plugin('template')
   
-  Object.assign(plugin, plugin_module)
+  Object.assign(this.plugin, plugin_module)
 })
 
 describe('register', () => {
   it('has a register function', () => {
-    assert.equal('function', typeof plugin.register)
+    assert.equal('function', typeof this.plugin.register)
   })
 
   it('registers', () => {
@@ -33,38 +30,38 @@ describe('register', () => {
       }
     }
 
-    assert.deepEqual(plugin.cfg, undefined)
-    plugin.register()
-    assert.deepEqual(plugin.cfg, expected_cfg)
+    assert.deepEqual(this.plugin.cfg, undefined)
+    this.plugin.register()
+    assert.deepEqual(this.plugin.cfg, expected_cfg)
   })
 })
 
 describe('load_template_ini', () => {
   it('loads', () => {
-    assert.equal('object', typeof plugin)
-    assert.equal('template', plugin.name)
+    assert.equal('object', typeof this.plugin)
+    assert.equal('template', this.plugin.name)
   })
 
   it('loads template.ini from config/template.ini', () => {
-    plugin.load_template_ini()
-    assert.ok(plugin.cfg)
+    this.plugin.load_template_ini()
+    assert.ok(this.plugin.cfg)
   })
 
   it('initializes enabled boolean', () => {
-    plugin.load_template_ini()
-    assert.equal(plugin.cfg.main.enabled, true, plugin.cfg)
+    this.plugin.load_template_ini()
+    assert.equal(this.plugin.cfg.main.enabled, true, this.plugin.cfg)
   })
 })
 
 describe('uses text fixtures', () => {
-  it('sets up a connection', () => {
-    connection = fixtures.connection.createConnection({})
-    assert.ok(connection.server)
+  it('sets up a this.connection', () => {
+    this.connection = fixtures.connection.createConnection({})
+    assert.ok(this.connection.server)
   })
 
   it('sets up a transaction', () => {
-    connection = fixtures.connection.createConnection({})
-    connection.init_transaction()
-    assert.ok(connection.transaction.header)
+    this.connection = fixtures.connection.createConnection({})
+    this.connection.init_transaction()
+    assert.ok(this.connection.transaction.header)
   })
 })
